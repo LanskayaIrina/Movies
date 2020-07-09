@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 
 import poster from '../../accets/poster.jpeg';
+const classNames = require('classnames');
 
 export const Movie = ({ movie, deleteMovie, addToMovieWillWatch, rermoveFromWillWatch }) => {
   const [willWatch, setWillWatch] = useState(false);
   const src = movie.backdrop_path ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}` : '';
+  const btnWillWatch = classNames({
+    'btn': true,
+    'btn-success': willWatch,
+    'btn-secondary': !willWatch,
+   })
 
   return (
     <div className="card movie">
@@ -16,7 +22,7 @@ export const Movie = ({ movie, deleteMovie, addToMovieWillWatch, rermoveFromWill
         <p className="mb-1">Rating: {movie.vote_average}</p>
         <div className="d-flex justify-content-between align-items-center">
           <button type="button"
-            className={willWatch ? "btn btn-success" : "btn btn-secondary"}
+            className={btnWillWatch}
             onClick={willWatch ? () => {
               rermoveFromWillWatch(movie.id);
               setWillWatch(!willWatch)
