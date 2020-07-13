@@ -33,7 +33,7 @@ export const Movie = ({ movie, deleteMovie, addToMovieWillWatch, rermoveFromWill
               addToMovieWillWatch(movie.id);
               setWillWatch(!willWatch)
             }}>{willWatch ? 'Watched' : 'Will watch'}</button>
-          <button type="button" className="btn btn-outline-secondary btn-font" onClick={() => deleteMovie(movie.id)}>delite</button>
+          <button type="button" className="btn btn-outline-secondary btn-font" onClick={() => deleteMovie(movie.id)}>Delete</button>
         </div>
       </div>
     </div>
