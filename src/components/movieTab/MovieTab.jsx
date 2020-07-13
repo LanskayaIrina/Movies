@@ -1,19 +1,33 @@
 import React from 'react';
+
+import { func, string } from 'prop-types';
+
 const classNames = require('classnames');
 
-export const MovieTab = ({ tab, sort_by, updateSortBy }) => {
-  const titleString = tab.split('.').filter((el) => el !== 'desc' && el !=='asc').join(' ');
-  const title = titleString.charAt(0).toUpperCase() + titleString.slice(1);
-  const activeClass = (sort_by === tab) ? true : false
-  const btnTab = classNames({
-   'nav-link': true,
-   'movie-link': true,
-   'active': activeClass
+const formatTitle = title => {
+  const sortTitle = title
+    .split('.')
+    .filter((el) => el !== 'desc' && el !== 'asc')
+    .join(' ');
+
+  return sortTitle.charAt(0).toUpperCase() + sortTitle.slice(1);
+}
+
+export const MovieTab = ({ tab, sortBy, onClickByTab }) => {
+  const title = formatTitle(tab);
+  const btnTab = classNames('nav-link', 'movie-link', 'btn-font', {
+    'active': sortBy === tab,
   })
 
   return (
     <li className="nav-item">
-      <div className={btnTab} onClick={() => updateSortBy(tab)}>{title}</div>
+      <div className={btnTab} onClick={() => onClickByTab(tab)}>{title}</div>
     </li>
   );
+};
+
+MovieTab.propTypes = {
+  tab: string.isRequired,
+  sortBy: string.isRequired,
+  onClickByTab: func.isRequired,
 };
